@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/we_are_the_winner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/we_are"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/font_tmon_monsori"
+            android:text="우리는 승리한다."
+            android:textColor="#000"
+            android:textSize="23sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/we_are"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/title"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/font_tmon_monsori"
+            android:text="We are"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/font_tmon_monsori"
+            android:text="The TEAM."
+            android:textColor="#000"
+            android:textSize="55sp"
+            android:textStyle="normal" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_pd"
+                android:hint="이메일"
+                android:padding="8dp"
+                android:textColor="@color/colorPrimaryBright"
+                android:textColorHint="@color/colorPrimaryBright"
+                android:textSize="18sp"
+                android:visibility="gone"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle_pd"
+                android:hint="비밀번호"
+                android:padding="8dp"
+                android:textColor="@color/colorPrimaryBright"
+                android:textColorHint="@color/colorPrimaryBright"
+                android:textSize="18sp"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="이미 가입했습니다."
+                android:textColor="@color/colorPrimaryBright"
+                android:textStyle="bold"
+                android:background="@drawable/rectangle_p"
+                android:textSize="18sp"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회원가입"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
