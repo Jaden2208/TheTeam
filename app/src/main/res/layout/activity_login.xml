@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="The TEAM 이 처음이신가요?"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:padding="3dp"
                 android:textColor="@color/colorPrimary" />
 

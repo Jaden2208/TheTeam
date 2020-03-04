@@ -2,7 +2,6 @@ package com.whalez.theteam.ui.sign
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 
 class RegisterPagerAdapter(fm: FragmentManager) :
@@ -10,16 +9,18 @@ class RegisterPagerAdapter(fm: FragmentManager) :
 
     companion object {
         const val pageCounts = 3
+        var name = ""
+        var email = ""
+        var age = ""
+        var area = ""
+        var introduce = ""
     }
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> StepOneFragment()
-
             1 -> StepTwoFragment()
-
             2 -> StepThreeFragment()
-
             else -> ErrorFragment()
         }
     }
