@@ -14,7 +14,9 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.whalez.theteam.R
+import com.whalez.theteam.R.string.*
 import com.whalez.theteam.ui.utils.ConstValues
+import com.whalez.theteam.ui.utils.ConstValues.Companion.TAG
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.fragment_step_one.*
 
@@ -60,7 +62,7 @@ class StepOneFragment : Fragment() {
         } else if (password1 == password2) {
             password_check_message.visibility = View.VISIBLE
             if (password1.length < 6) {
-                password_check_message.text = "비밀번호는 6자 이상이어야 합니다."
+                password_check_message.text = getString(password_length_short)
                 password_check_message.setTextColor(
                     ContextCompat.getColor(
                         activity!!.applicationContext,
@@ -68,7 +70,7 @@ class StepOneFragment : Fragment() {
                     )
                 )
             } else {
-                password_check_message.text = "비밀번호가 일치합니다."
+                password_check_message.text = getString(password_ok)
                 password_check_message.setTextColor(
                     ContextCompat.getColor(
                         activity!!.applicationContext,
@@ -78,7 +80,7 @@ class StepOneFragment : Fragment() {
             }
         } else {
             password_check_message.visibility = View.VISIBLE
-            password_check_message.text = "비밀번호가 일치하지 않습니다."
+            password_check_message.text = getString(password_not_ok)
             password_check_message.setTextColor(
                 ContextCompat.getColor(
                     activity!!.applicationContext,
@@ -90,7 +92,15 @@ class StepOneFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        RegisterPagerAdapter.name = et_name.text.trim().toString()
-        RegisterPagerAdapter.email = et_email.text.trim().toString()
+        Log.d(TAG, "onPause1")
+        val name = et_name.text.trim().toString()
+        val email = et_email.text.trim().toString()
+        if(name.isNotEmpty() && email.isNotEmpty() &&
+            password_check_message.text.toString() == getString(password_ok)) {
+            RegisterPagerAdapter.readyToRegister = true
+            RegisterPagerAdapter.password = et_password1.text.toString()
+        }
+        RegisterPagerAdapter.name = name
+        RegisterPagerAdapter.email = email
     }
 }

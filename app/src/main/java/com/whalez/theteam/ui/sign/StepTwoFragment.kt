@@ -28,7 +28,7 @@ class StepTwoFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        Log.d(ConstValues.TAG, "onPause1")
+        Log.d(ConstValues.TAG, "onPause2")
         RegisterPagerAdapter.age = et_age.text.trim().toString()
         RegisterPagerAdapter.area = et_area.text.trim().toString()
         RegisterPagerAdapter.introduce = et_introduce.text.trim().toString()

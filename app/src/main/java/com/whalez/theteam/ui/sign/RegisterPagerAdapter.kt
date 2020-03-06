@@ -11,9 +11,11 @@ class RegisterPagerAdapter(fm: FragmentManager) :
         const val pageCounts = 3
         var name = ""
         var email = ""
+        var password = ""
         var age = ""
         var area = ""
         var introduce = ""
+        var readyToRegister = false
     }
 
     override fun getItem(position: Int): Fragment {

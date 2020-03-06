@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import com.whalez.theteam.R
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -15,8 +16,13 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         btn_login.setOnClickListener {
+            val email = et_email.text.toString()
+            val password = et_password.text.toString()
             if(btn_login.text == "로그인"){
                 Toast.makeText(this, "로그인 시도!", Toast.LENGTH_SHORT).show()
+//                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+////                    .addOnCompleteListener {  }
+////                    .addOnFailureListener {  }
             } else {
                 et_email.visibility = View.VISIBLE
                 et_password.visibility = View.VISIBLE

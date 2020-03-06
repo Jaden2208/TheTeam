@@ -27,9 +27,10 @@ class StepThreeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        Log.d(TAG, "onResume3")
         tv_name.text = RegisterPagerAdapter.name
         tv_email.text = RegisterPagerAdapter.email
-        tv_age.text = "${RegisterPagerAdapter.age}세"
+        tv_age.text = RegisterPagerAdapter.age
         tv_area.text = RegisterPagerAdapter.area
         tv_introduce.text = RegisterPagerAdapter.introduce
     }
