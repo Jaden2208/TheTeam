@@ -1,7 +1,14 @@
 package com.whalez.theteam.ui.sign
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.graphics.Typeface
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -13,6 +20,7 @@ import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.bumptech.glide.Glide
 import com.whalez.theteam.R
 import com.whalez.theteam.R.string.*
 import com.whalez.theteam.ui.utils.ConstValues
@@ -21,6 +29,8 @@ import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.fragment_step_one.*
 
 class StepOneFragment : Fragment() {
+
+//    private var selectedPhotoUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,8 +42,16 @@ class StepOneFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Log.d(ConstValues.TAG, "onActivityCreated1")
+        Log.d(TAG, "onActivityCreated1")
         activity!!.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
+
+        profile_image.setOnClickListener {
+            Log.d(TAG, "사진 클릭")
+
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, 0)
+        }
 
         et_password1.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
@@ -51,6 +69,18 @@ class StepOneFragment : Fragment() {
             }
         })
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d(TAG, "onActivityResult1")
+
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
+            RegisterPagerAdapter.photoUri = data.data
+            Glide.with(this)
+                .load(RegisterPagerAdapter.photoUri)
+                .into(profile_image)
+        }
     }
 
 
@@ -90,13 +120,24 @@ class StepOneFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        val photoUri = RegisterPagerAdapter.photoUri
+        if (photoUri != null) {
+            Glide.with(this)
+                .load(photoUri)
+                .into(profile_image)
+        }
+    }
+
     override fun onPause() {
         super.onPause()
         Log.d(TAG, "onPause1")
         val name = et_name.text.trim().toString()
         val email = et_email.text.trim().toString()
-        if(name.isNotEmpty() && email.isNotEmpty() &&
-            password_check_message.text.toString() == getString(password_ok)) {
+        if (name.isNotEmpty() && email.isNotEmpty() &&
+            password_check_message.text.toString() == getString(password_ok)
+        ) {
             RegisterPagerAdapter.readyToRegister = true
             RegisterPagerAdapter.password = et_password1.text.toString()
         }

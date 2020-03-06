@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.whalez.theteam.R
 import com.whalez.theteam.ui.utils.ConstValues.Companion.TAG
 import kotlinx.android.synthetic.main.fragment_step_three.*
@@ -28,6 +29,9 @@ class StepThreeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "onResume3")
+        Glide.with(this)
+            .load(RegisterPagerAdapter.photoUri)
+            .into(profile_image)
         tv_name.text = RegisterPagerAdapter.name
         tv_email.text = RegisterPagerAdapter.email
         tv_age.text = RegisterPagerAdapter.age

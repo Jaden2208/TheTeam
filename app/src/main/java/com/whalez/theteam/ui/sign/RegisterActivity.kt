@@ -1,6 +1,7 @@
 package com.whalez.theteam.ui.sign
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,21 +9,29 @@ import android.view.View
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import com.whalez.theteam.R
 import com.whalez.theteam.R.string.email_already_registered
 import com.whalez.theteam.R.string.email_format_error
+import com.whalez.theteam.data.User
+import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.age
+import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.area
+import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.introduce
+import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.name
 import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.pageCounts
+import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.photoUri
 import com.whalez.theteam.ui.utils.ConstValues
 import com.whalez.theteam.ui.utils.ConstValues.Companion.TAG
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.fragment_step_one.*
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-
 
         val registerPagerAdapter = RegisterPagerAdapter(supportFragmentManager)
         vp_register.apply {
@@ -76,6 +85,34 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun uploadImageToFirebaseStorage() {
+        if(photoUri == null) return
+        val filename = UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+        ref.putFile(photoUri!!)
+            .addOnSuccessListener {
+                Log.d(TAG, "사진 저장 완료 : ${it.metadata?.path}")
+
+                ref.downloadUrl.addOnSuccessListener {url ->
+                    saveUserToFirebaseDatabase(url.toString())
+                }
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "사진 저장 실패 : ${it.message}")
+            }
+    }
+
+    private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
+        Log.d(TAG, "DB저장 시작")
+        val uid = FirebaseAuth.getInstance().uid.toString()
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val user = User(uid, name, age, area, introduce, profileImageUrl)
+        ref.setValue(user)
+            .addOnSuccessListener {
+                Log.d(TAG, "firebase DB에 저장됨!")
+            }
+    }
+
     private fun performRegister(){
         val userEmail = RegisterPagerAdapter.email
         val userPassword = RegisterPagerAdapter.password
@@ -84,7 +121,9 @@ class RegisterActivity : AppCompatActivity() {
         firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
             .addOnCompleteListener {
                 if(it.isSuccessful) {
+                    uploadImageToFirebaseStorage()
                     Toast.makeText(this, "회원가입 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    photoUri = null
                     finish()
                 }
             }

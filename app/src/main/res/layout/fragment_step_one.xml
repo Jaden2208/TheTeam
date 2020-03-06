@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.sign.StepOneFragment"
-    android:background="@color/colorPrimaryBright">
+    android:background="@color/colorPrimaryBright"
+    tools:context=".ui.sign.StepOneFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,98 +15,97 @@
             android:id="@+id/top_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="기본 정보 (필수)"
-            android:textSize="25sp"
-            android:paddingVertical="10dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:layout_centerHorizontal="true"
             android:background="@color/colorBackground"
             android:fontFamily="@font/font_tmon_monsori"
             android:gravity="center"
-            android:layout_centerHorizontal="true"/>
+            android:paddingVertical="10dp"
+            android:text="기본 정보 (필수)"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="25sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingHorizontal="50dp"
             android:layout_below="@+id/top_layout"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="50dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/profile_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/ic_default_profile_img"
-                app:civ_border_width="0dp"
-                app:civ_border_color="#FF000000"/>
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="이름"
-                android:textSize="20sp"
                 android:layout_marginTop="20dp"
+                android:text="이름"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/rectangle_b"
                 android:fontFamily="@font/font_seoul_namsan_l"
-                android:padding="8dp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/colorPrimaryDark"
+                android:inputType="text"
                 android:nextFocusDown="@+id/et_email"
-                android:textSize="18sp"
-                android:inputType="text"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="이메일"
-                android:textSize="20sp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"/>
-
-            <EditText
-                android:id="@+id/et_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rectangle_b"
-                android:fontFamily="@font/font_seoul_namsan_l"
                 android:padding="8dp"
-                android:layout_marginTop="5dp"
-                android:inputType="textEmailAddress"
                 android:textColor="@color/colorPrimaryDark"
-                android:nextFocusDown="@+id/et_password1"
                 android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호"
-                android:textSize="20sp"
                 android:layout_marginTop="10dp"
+                android:text="이메일"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rectangle_b"
+                android:fontFamily="@font/font_seoul_namsan_l"
+                android:inputType="textEmailAddress"
+                android:nextFocusDown="@+id/et_password1"
+                android:padding="8dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="비밀번호"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/et_password1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/rectangle_b"
                 android:fontFamily="@font/font_seoul_namsan_l"
+                android:hint="비밀번호"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
                 android:nextFocusDown="@+id/et_password2"
                 android:padding="8dp"
-                android:hint="비밀번호"
-                android:inputType="textPassword"
-                android:imeOptions="actionNext"
                 android:singleLine="true"
-                android:layout_marginTop="5dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />
 
@@ -113,12 +113,12 @@
                 android:id="@+id/et_password2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/rectangle_b"
                 android:fontFamily="@font/font_seoul_namsan_l"
-                android:inputType="textPassword"
                 android:hint="비밀번호 확인"
+                android:inputType="textPassword"
                 android:padding="8dp"
-                android:layout_marginTop="5dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />
 
@@ -127,15 +127,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textSize="15sp"
-                android:textColor="@color/colorAccent"
                 android:text="비밀번호가 일치하지 않습니다."
-                android:visibility="invisible"/>
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp"
+                android:visibility="invisible" />
 
         </LinearLayout>
 
     </RelativeLayout>
-
 
 
 </FrameLayout>
