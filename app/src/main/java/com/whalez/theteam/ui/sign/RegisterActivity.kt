@@ -25,6 +25,8 @@ import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.pageCounts
 import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.photoUri
 import com.whalez.theteam.ui.utils.ConstValues
 import com.whalez.theteam.ui.utils.ConstValues.Companion.TAG
+import com.whalez.theteam.ui.utils.hideLoading
+import com.whalez.theteam.ui.utils.showLoading
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.fragment_step_one.*
 import java.util.*
@@ -116,6 +118,9 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun performRegister() {
+
+        showLoading(loading_layout)
+
         val userEmail = RegisterPagerAdapter.email
         val userPassword = RegisterPagerAdapter.password
         val firebaseAuth = FirebaseAuth.getInstance()
@@ -133,17 +138,20 @@ class RegisterActivity : AppCompatActivity() {
                                             this@RegisterActivity,
                                             R.style.MyAlertDialogStyle
                                         )
-                                    ).setMessage("본인 확인을 위한 이메일을\n[" + user.email + "] (으)로 보냈습니다.")
+                                    ).setCancelable(false)
+                                    .setMessage("본인 확인을 위한 이메일을\n[" + user.email + "] (으)로 보냈습니다.")
                                     .setPositiveButton("확인") { _, _ ->
                                         photoUri = null
                                         finish()
                                     }
+
                                     .show()
                             }
                     }
                 }
             }
             .addOnFailureListener {
+                hideLoading(loading_layout)
                 val message = when (it.message) {
                     getString(email_format_error) -> "이메일 형식이 잘못되었습니다."
                     getString(email_already_registered) -> "이미 가입된 이메일입니다."
@@ -154,7 +162,7 @@ class RegisterActivity : AppCompatActivity() {
                             this@RegisterActivity,
                             R.style.MyAlertDialogStyle
                         )
-                    )
+                    ).setCancelable(false)
                     .setMessage(message)
                     .setPositiveButton("확인") { _, _ ->
                     }

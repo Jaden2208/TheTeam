@@ -13,6 +13,8 @@ import com.whalez.theteam.R
 import com.whalez.theteam.ui.home.MainActivity
 import com.whalez.theteam.ui.utils.ConstValues
 import com.whalez.theteam.ui.utils.ConstValues.Companion.TAG
+import com.whalez.theteam.ui.utils.hideLoading
+import com.whalez.theteam.ui.utils.showLoading
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -23,7 +25,6 @@ class LoginActivity : AppCompatActivity() {
 
         btn_login.setOnClickListener {
             if (btn_login.text == "로그인") {
-                Toast.makeText(this, "로그인 시도!", Toast.LENGTH_SHORT).show()
                 performLogin()
             } else {
                 et_email.visibility = View.VISIBLE
@@ -47,13 +48,19 @@ class LoginActivity : AppCompatActivity() {
             val message = "아이디 또는 비밀번호를 확인해주세요."
             showDialogAndClearPassword(message)
         } else {
+
+            showLoading(loading_layout)
+
             val firebaseAuth = FirebaseAuth.getInstance()
             firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if(task.isSuccessful) {
                         val user = firebaseAuth.currentUser
                         if(!user!!.isEmailVerified) {
-                            val message = "아직 이메일을 통한 본인 인증을 완료하지 않았습닌다. 이메일을 확인해주세요."
+
+                            hideLoading(loading_layout)
+
+                            val message = "아직 이메일을 통한 본인 인증을 완료하지 않았습니다. 이메일을 확인해주세요."
                             showDialogAndClearPassword(message)
                         } else {
 //                            userSessionManager.createSession(userId)
@@ -66,6 +73,9 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
                 .addOnFailureListener {
+
+                    hideLoading(loading_layout)
+
                     val errorMessage = when (it.message) {
                         getString(R.string.email_format_error) ->
                             "이메일 형식이 올바르지 않습니다."

@@ -13,6 +13,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_layout" />
 
+
+
     <RelativeLayout
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
@@ -55,7 +57,28 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp" />
 
+
     </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#70000000"
+        android:visibility="gone">
+
+        <me.ibrahimsn.lib.CirclesLoadingView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:circleRadius="8dp"
+            app:circleMargin="8dp"
+            app:animDistance="10dp"
+            app:animDuration="300"
+            app:animDelay="150"
+            app:animInterpolator="accelerateDecelerate"/>
+    </FrameLayout>
+
 
 
 </RelativeLayout>
