@@ -7,4 +7,7 @@
 
     <string name="email_format_error">The email address is badly formatted.</string>
     <string name="email_already_registered">The email address is already in use by another account.</string>
+    <string name="network_error">An internal error has occurred. [ 7: ]</string>
+    <string name="not_exist_user">There is no user record corresponding to this identifier. The user may have been deleted.</string>
+    <string name="password_error">The password is invalid or the user does not have a password.</string>
 </resources>

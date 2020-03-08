@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.sign.RegisterActivity"
-    android:background="@color/colorPrimaryBright">
-
-
+    android:background="@color/colorPrimaryBright"
+    tools:context=".ui.sign.RegisterActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_register"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_layout"/>
+        android:layout_above="@+id/bottom_layout" />
 
     <RelativeLayout
         android:id="@+id/bottom_layout"
@@ -58,7 +56,6 @@
             android:textSize="20sp" />
 
     </RelativeLayout>
-
 
 
 </RelativeLayout>

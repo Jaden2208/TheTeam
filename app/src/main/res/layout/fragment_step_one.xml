@@ -118,6 +118,7 @@
                 android:fontFamily="@font/font_seoul_namsan_l"
                 android:hint="비밀번호 확인"
                 android:inputType="textPassword"
+                android:nextFocusDown="@+id/password_check_message"
                 android:padding="8dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />

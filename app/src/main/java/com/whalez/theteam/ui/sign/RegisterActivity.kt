@@ -5,8 +5,10 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.viewpager.widget.ViewPager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -36,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
         val registerPagerAdapter = RegisterPagerAdapter(supportFragmentManager)
         vp_register.apply {
             adapter = registerPagerAdapter
-            addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
+            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrollStateChanged(state: Int) {
                 }
 
@@ -46,7 +48,7 @@ class RegisterActivity : AppCompatActivity() {
                     positionOffset: Float,
                     positionOffsetPixels: Int
                 ) {
-                    tv_page.text = "${position+1}/$pageCounts"
+                    tv_page.text = "${position + 1}/$pageCounts"
                     when (position) {
                         0 -> btn_back.visibility = View.GONE
                         else -> btn_back.visibility = View.VISIBLE
@@ -68,15 +70,15 @@ class RegisterActivity : AppCompatActivity() {
 
         btn_back.setOnClickListener {
             val backPage = vp_register.currentItem - 1
-            if(backPage >= 0)
+            if (backPage >= 0)
                 vp_register.setCurrentItem(backPage, true)
         }
         btn_next.setOnClickListener {
             val nextPage = vp_register.currentItem + 1
-            if(nextPage < pageCounts)
+            if (nextPage < pageCounts)
                 vp_register.setCurrentItem(nextPage, true)
             else { // 마지막 페이지인 경우
-                if(RegisterPagerAdapter.readyToRegister) {
+                if (RegisterPagerAdapter.readyToRegister) {
                     performRegister()
                 } else {
                     Toast.makeText(this, "기본 정보 페이지(1/3)를 다시 확인해주세요.", Toast.LENGTH_SHORT).show()
@@ -86,14 +88,14 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun uploadImageToFirebaseStorage() {
-        if(photoUri == null) return
+        if (photoUri == null) return
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
         ref.putFile(photoUri!!)
             .addOnSuccessListener {
                 Log.d(TAG, "사진 저장 완료 : ${it.metadata?.path}")
 
-                ref.downloadUrl.addOnSuccessListener {url ->
+                ref.downloadUrl.addOnSuccessListener { url ->
                     saveUserToFirebaseDatabase(url.toString())
                 }
             }
@@ -113,28 +115,51 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun performRegister(){
+    private fun performRegister() {
         val userEmail = RegisterPagerAdapter.email
         val userPassword = RegisterPagerAdapter.password
         val firebaseAuth = FirebaseAuth.getInstance()
 
         firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
             .addOnCompleteListener {
-                if(it.isSuccessful) {
+                if (it.isSuccessful) {
                     uploadImageToFirebaseStorage()
-                    Toast.makeText(this, "회원가입 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                    photoUri = null
-                    finish()
+                    val user = firebaseAuth.currentUser
+                    if (user != null && !user.isEmailVerified) { // 사용자가 존재하지 않고 이메일 인증이 안된 경우
+                        user.sendEmailVerification()
+                            .addOnCompleteListener {
+                                AlertDialog.Builder(
+                                        ContextThemeWrapper(
+                                            this@RegisterActivity,
+                                            R.style.MyAlertDialogStyle
+                                        )
+                                    ).setMessage("본인 확인을 위한 이메일을\n[" + user.email + "] (으)로 보냈습니다.")
+                                    .setPositiveButton("확인") { _, _ ->
+                                        photoUri = null
+                                        finish()
+                                    }
+                                    .show()
+                            }
+                    }
                 }
             }
             .addOnFailureListener {
-                var message = ""
-                message = when (it.message) {
-                    getString(email_format_error) -> "입력한 이메일을 다시 확인해주세요."
+                val message = when (it.message) {
+                    getString(email_format_error) -> "이메일 형식이 잘못되었습니다."
                     getString(email_already_registered) -> "이미 가입된 이메일입니다."
-                    else -> it.message.toString()
+                    else -> "알 수 없는 오류가 발생했습니다. [${it.message.toString()}]"
                 }
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                AlertDialog.Builder(
+                        ContextThemeWrapper(
+                            this@RegisterActivity,
+                            R.style.MyAlertDialogStyle
+                        )
+                    )
+                    .setMessage(message)
+                    .setPositiveButton("확인") { _, _ ->
+                    }
+                    .show()
             }
     }
 }
+
