@@ -6,8 +6,6 @@ import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.view.View
 import android.widget.FrameLayout
-import androidx.core.content.ContextCompat.startActivity
-import com.whalez.theteam.ui.home.MainActivity
 import com.whalez.theteam.ui.sign.LoginActivity
 
 fun showLoading(frameLayout: FrameLayout) {

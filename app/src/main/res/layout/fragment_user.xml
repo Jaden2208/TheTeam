@@ -7,9 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="20dp"
+        android:orientation="vertical"
         android:paddingHorizontal="10dp"
-        android:orientation="vertical">
+        android:paddingVertical="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,89 +53,187 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_left_right_bottom"
             android:orientation="vertical"
-            android:background="@drawable/rectangle_left_right_bottom">
+            android:padding="1dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:text="경기 결과"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_margin="8dp"/>
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_match_result"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:padding="5dp"/>
+                android:padding="5dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/rectangle_left_right_bottom">
+            android:background="@drawable/rectangle_left_right_bottom"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:text="기록"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_margin="8dp"/>
+                android:textStyle="bold" />
 
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="5dp"
                 android:stretchColumns="*">
 
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimaryDark">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryBright"
-                        android:text="득점"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:gravity="center"
                         android:layout_marginVertical="1dp"
                         android:layout_marginStart="1dp"
                         android:layout_marginEnd="0.5dp"
-                        android:padding="2dp"/>
+                        android:background="@color/colorPrimaryBright"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:text="득점"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryBright"
-                        android:text="도움"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:gravity="center"
                         android:layout_marginVertical="1dp"
                         android:layout_marginStart="0.5dp"
                         android:layout_marginEnd="0.5dp"
-                        android:padding="2dp"/>
+                        android:background="@color/colorPrimaryBright"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:text="도움"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryBright"
-                        android:text="선방"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:gravity="center"
                         android:layout_marginVertical="1dp"
                         android:layout_marginStart="0.5dp"
                         android:layout_marginEnd="1dp"
-                        android:padding="2dp"/>
+                        android:background="@color/colorPrimaryBright"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:text="선방"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginEnd="0.5dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="@color/colorBackground"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:text="18"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0.5dp"
+                        android:layout_marginEnd="0.5dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="@color/colorBackground"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:text="25"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0.5dp"
+                        android:layout_marginEnd="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="@color/colorBackground"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:text="0"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="15sp" />
                 </TableRow>
 
             </TableLayout>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_left_right_bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="감독 평가"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_manager_comments"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_left_right_bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="동료 평가"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_teammates_comments"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="5dp" />
         </LinearLayout>
 
 

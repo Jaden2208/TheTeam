@@ -6,12 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.whalez.theteam.R
-import com.whalez.theteam.ui.home.MainActivity
-import com.whalez.theteam.ui.utils.ConstValues
+import com.whalez.theteam.ui.main.MainActivity
 import com.whalez.theteam.ui.utils.ConstValues.Companion.TAG
 import com.whalez.theteam.ui.utils.hideLoading
 import com.whalez.theteam.ui.utils.showLoading

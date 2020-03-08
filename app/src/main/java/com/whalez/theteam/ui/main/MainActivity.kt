@@ -1,12 +1,15 @@
-package com.whalez.theteam.ui.home
+package com.whalez.theteam.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.whalez.theteam.R
+import com.whalez.theteam.ui.main.home.HomeFragment
+import com.whalez.theteam.ui.main.setting.SettingFragment
+import com.whalez.theteam.ui.main.team.TeamFragment
+import com.whalez.theteam.ui.main.user.UserFragment
 import com.whalez.theteam.ui.sign.ErrorFragment
 import com.whalez.theteam.ui.utils.finishAndGoToLoginActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,7 +32,9 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fl_main, HomeFragment()).commitAllowingStateLoss()
+        transaction.replace(R.id.fl_main,
+            HomeFragment()
+        ).commitAllowingStateLoss()
 
         nv_main.setOnNavigationItemSelectedListener(ItemSelectedListener())
     }
