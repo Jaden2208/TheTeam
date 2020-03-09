@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal"
+    android:background="@color/colorBackground">
+
+    <TextView
+        android:id="@+id/tv_position"
+        android:layout_width="40sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:text="RW"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textSize="14sp"
+        android:padding="5dp"
+        android:background="@drawable/rectangle_striker"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유재준"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginStart="10dp"
+        android:layout_gravity="center_vertical"/>
+
+
+
+</LinearLayout>
