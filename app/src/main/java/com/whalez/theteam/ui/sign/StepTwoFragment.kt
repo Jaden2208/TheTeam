@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.whalez.theteam.R
-import com.whalez.theteam.ui.utils.ConstValues
-import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.fragment_step_two.*
+import com.whalez.theteam.utils.ConstValues
+import kotlinx.android.synthetic.main.fragment_register_step_two.*
 
 class StepTwoFragment : Fragment() {
 
@@ -18,7 +17,7 @@ class StepTwoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_step_two, container, false)
+        return inflater.inflate(R.layout.fragment_register_step_two, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

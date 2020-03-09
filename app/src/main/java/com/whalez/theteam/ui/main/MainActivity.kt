@@ -11,7 +11,7 @@ import com.whalez.theteam.ui.main.setting.SettingFragment
 import com.whalez.theteam.ui.main.team.TeamFragment
 import com.whalez.theteam.ui.main.user.UserFragment
 import com.whalez.theteam.ui.sign.ErrorFragment
-import com.whalez.theteam.ui.utils.finishAndGoToLoginActivity
+import com.whalez.theteam.utils.finishAndGoToLoginActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -25,25 +25,19 @@ class MainActivity : AppCompatActivity() {
 
         checkLoginStatus()
 
-//        btn_logout.setOnClickListener {
-//            firebaseAuth.signOut()
-//            finishAndGoToLoginActivity(applicationContext, this)
-//            Toast.makeText(this, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show()
-//        }
-
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fl_main,
             HomeFragment()
         ).commitAllowingStateLoss()
 
         nv_main.setOnNavigationItemSelectedListener(ItemSelectedListener())
+
     }
 
     private fun checkLoginStatus() {
         if(user != null){
 //            text_view.text = user.email
         } else {
-//            text_view.text = "로그인 되어있지 않음."
             finishAndGoToLoginActivity(applicationContext, this)
         }
     }

@@ -2,13 +2,7 @@ package com.whalez.theteam.ui.sign
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
-import android.graphics.Typeface
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -17,16 +11,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
 import com.whalez.theteam.R
 import com.whalez.theteam.R.string.*
-import com.whalez.theteam.ui.utils.ConstValues
-import com.whalez.theteam.ui.utils.ConstValues.Companion.TAG
-import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.fragment_step_one.*
+import com.whalez.theteam.utils.ConstValues.Companion.TAG
+import kotlinx.android.synthetic.main.fragment_register_step_one.*
 
 class StepOneFragment : Fragment() {
 
@@ -37,7 +27,7 @@ class StepOneFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_step_one, container, false)
+        return inflater.inflate(R.layout.fragment_register_step_one, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

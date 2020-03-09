@@ -55,4 +55,7 @@ dependencies {
     // CirclesLoadingView
     implementation 'com.github.ibrahimsn98:CirclesLoadingView:1.0'
 
+    // Groupie
+    implementation "com.xwray:groupie:2.7.0"
+
 }

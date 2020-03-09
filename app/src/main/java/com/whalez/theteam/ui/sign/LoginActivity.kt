@@ -10,9 +10,10 @@ import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.whalez.theteam.R
 import com.whalez.theteam.ui.main.MainActivity
-import com.whalez.theteam.ui.utils.ConstValues.Companion.TAG
-import com.whalez.theteam.ui.utils.hideLoading
-import com.whalez.theteam.ui.utils.showLoading
+import com.whalez.theteam.utils.ConstValues.Companion.TAG
+import com.whalez.theteam.utils.hideLoading
+import com.whalez.theteam.utils.showLoading
+//import com.whalez.theteam.util.FirestoreUtil
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -61,7 +62,9 @@ class LoginActivity : AppCompatActivity() {
                             val message = "아직 이메일을 통한 본인 인증을 완료하지 않았습니다. 이메일을 확인해주세요."
                             showDialogAndClearPassword(message)
                         } else {
-//                            userSessionManager.createSession(userId)
+//                            FirestoreUtil.initCurrentUserIfFirstTime {
+//
+//                            }
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             finish()

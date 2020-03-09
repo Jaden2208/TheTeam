@@ -1,4 +1,4 @@
-package com.whalez.theteam.ui.utils
+package com.whalez.theteam.utils
 
 class ConstValues {
 

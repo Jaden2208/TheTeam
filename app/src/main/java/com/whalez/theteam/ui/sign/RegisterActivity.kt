@@ -1,7 +1,6 @@
 package com.whalez.theteam.ui.sign
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,12 +22,10 @@ import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.introduce
 import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.name
 import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.pageCounts
 import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.photoUri
-import com.whalez.theteam.ui.utils.ConstValues
-import com.whalez.theteam.ui.utils.ConstValues.Companion.TAG
-import com.whalez.theteam.ui.utils.hideLoading
-import com.whalez.theteam.ui.utils.showLoading
+import com.whalez.theteam.utils.ConstValues.Companion.TAG
+import com.whalez.theteam.utils.hideLoading
+import com.whalez.theteam.utils.showLoading
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.fragment_step_one.*
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -143,9 +140,7 @@ class RegisterActivity : AppCompatActivity() {
                                     .setPositiveButton("확인") { _, _ ->
                                         photoUri = null
                                         finish()
-                                    }
-
-                                    .show()
+                                    }.show()
                             }
                     }
                 }

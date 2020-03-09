@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.whalez.theteam.R
-import com.whalez.theteam.ui.utils.ConstValues.Companion.TAG
-import kotlinx.android.synthetic.main.fragment_step_three.*
+import com.whalez.theteam.utils.ConstValues.Companion.TAG
+import kotlinx.android.synthetic.main.fragment_register_step_three.*
 
 class StepThreeFragment : Fragment() {
 
@@ -18,7 +18,7 @@ class StepThreeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_step_three, container, false)
+        return inflater.inflate(R.layout.fragment_register_step_three, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
