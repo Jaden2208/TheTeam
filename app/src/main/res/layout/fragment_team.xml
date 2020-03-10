@@ -19,7 +19,7 @@
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/btn_make_new_team"
+            android:id="@+id/btn_create_new_team"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="새 팀 만들기"
@@ -27,7 +27,21 @@
             android:padding="5dp"
             android:textSize="18sp"
             android:textColor="#fff"
-            android:background="@drawable/rectangle_pd"/>
+            android:background="@drawable/rectangle_pd"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <SearchView
+            android:id="@+id/team_search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="팀명을 입력해주세요"
+            android:iconifiedByDefault="false"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_of_teams"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

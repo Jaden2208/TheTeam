@@ -20,8 +20,6 @@ import kotlinx.android.synthetic.main.fragment_register_step_one.*
 
 class StepOneFragment : Fragment() {
 
-//    private var selectedPhotoUri: Uri? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
