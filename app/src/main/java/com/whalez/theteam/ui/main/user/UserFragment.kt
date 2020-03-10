@@ -114,11 +114,13 @@ class UserFragment : Fragment() {
             override fun onDataChange(p0: DataSnapshot) {
                 val user = p0.getValue(User::class.java)!!
                 val photoUri = Uri.parse(user.profileImageUrl)
+                var userTeam = user.team
+                if(userTeam.isEmpty()) userTeam = "소속 팀이 없습니다."
                 Glide.with(this@UserFragment)
                     .load(photoUri)
                     .into(profile_image)
                 tv_name.text = user.name
-                tv_team.text = user.team
+                tv_team.text = userTeam
                 hideLoading(loading_layout)
             }
 

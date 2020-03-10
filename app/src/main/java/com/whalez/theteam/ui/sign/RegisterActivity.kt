@@ -99,6 +99,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
+                hideLoading(loading_layout)
                 Log.d(TAG, "사진 저장 실패 : ${it.message}")
             }
     }

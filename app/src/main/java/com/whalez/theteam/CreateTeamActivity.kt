@@ -8,11 +8,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.whalez.theteam.data.Team
-import com.whalez.theteam.ui.sign.RegisterPagerAdapter.Companion.photoUri
-import com.whalez.theteam.utils.ConstValues
 import com.whalez.theteam.utils.ConstValues.Companion.TAG
 import com.whalez.theteam.utils.hideLoading
 import com.whalez.theteam.utils.showLoading
@@ -25,6 +24,13 @@ class CreateTeamActivity : AppCompatActivity() {
     private var teamName = ""
     private var teamOwner = ""
     private var teamIntroduce = ""
+//    private val returnIntent = Intent()
+
+    companion object{
+        const val TEAM = "team"
+        const val SAVED = "saved"
+        const val UNSAVED = "unsaved"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,15 +42,19 @@ class CreateTeamActivity : AppCompatActivity() {
             startActivityForResult(intent, 0)
         }
 
-        btn_cancel.setOnClickListener { finish() }
+        btn_cancel.setOnClickListener {
+//            returnIntent.putExtra(TEAM, UNSAVED)
+            setResult(Activity.RESULT_CANCELED)
+            finish()
+        }
 
         btn_create.setOnClickListener {
             teamName = et_team_name.text.toString().trim()
             teamOwner = et_team_owner.text.toString().trim()
-            if(teamOwner.isEmpty()) teamOwner = et_team_owner.hint.toString()
+            if (teamOwner.isEmpty()) teamOwner = et_team_owner.hint.toString()
             teamIntroduce = et_team_introduce.text.toString()
 
-            if(teamName.isEmpty()){
+            if (teamName.isEmpty()) {
                 Toast.makeText(this, "팀 명을 입력해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -52,6 +62,7 @@ class CreateTeamActivity : AppCompatActivity() {
             performCreateTeam()
 
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -77,7 +88,7 @@ class CreateTeamActivity : AppCompatActivity() {
         if (teamLogoUri == null) return
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
-        ref.putFile(photoUri!!)
+        ref.putFile(teamLogoUri!!)
             .addOnSuccessListener {
                 Log.d(TAG, "사진 저장 완료 : ${it.metadata?.path}")
 
@@ -86,19 +97,22 @@ class CreateTeamActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
+                hideLoading(loading_layout)
                 Log.d(TAG, "사진 저장 실패 : ${it.message}")
             }
     }
 
-    private fun saveTeamToFirebaseDatabase(teamLogoUrl: String){
-        val ref = FirebaseDatabase.getInstance().getReference("/team")
-
-        // 존재하는 teamName 인지 먼저 확인해야됨!
-        // 여기서 말고 그전에 존재하는 팀인지 확인하는 버튼을 만드는게 더 나아 보임.
+    private fun saveTeamToFirebaseDatabase(teamLogoUrl: String) {
+        val teamNameUid = "${teamName}_${FirebaseAuth.getInstance().uid}"
+        val ref = FirebaseDatabase.getInstance().getReference("/team/$teamNameUid")
         val team = Team(teamName, teamOwner, teamIntroduce, teamLogoUrl)
         ref.setValue(team)
             .addOnSuccessListener {
                 Log.d(TAG, "firebase DB에 저장됨!")
+//                returnIntent.putExtra(TEAM, SAVED)
+//                setResult(Activity.RESULT_OK, returnIntent)
+                setResult(Activity.RESULT_OK)
+                finish()
             }
             .addOnFailureListener {
                 hideLoading(loading_layout)

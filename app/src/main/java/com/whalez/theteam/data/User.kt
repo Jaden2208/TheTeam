@@ -7,5 +7,5 @@ data class User(
     val area: String = "",
     val introduce: String = "",
     val profileImageUrl: String = "",
-    val team: String = "소속 팀 없음"
+    val team: String = ""
 )
