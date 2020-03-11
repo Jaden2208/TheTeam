@@ -1,4 +1,4 @@
-package com.whalez.theteam
+package com.whalez.theteam.ui.main.team
 
 import android.app.Activity
 import android.content.Intent
@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.whalez.theteam.R
 import com.whalez.theteam.data.Team
 import com.whalez.theteam.utils.ConstValues.Companion.TAG
 import com.whalez.theteam.utils.hideLoading
@@ -24,7 +25,6 @@ class CreateTeamActivity : AppCompatActivity() {
     private var teamName = ""
     private var teamOwner = ""
     private var teamIntroduce = ""
-//    private val returnIntent = Intent()
 
     companion object{
         const val TEAM = "team"
@@ -85,7 +85,7 @@ class CreateTeamActivity : AppCompatActivity() {
     }
 
     private fun uploadImageToFirebaseStorage() {
-        if (teamLogoUri == null) return
+        if (teamLogoUri == null) saveTeamToFirebaseDatabase("")
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
         ref.putFile(teamLogoUri!!)
@@ -103,14 +103,16 @@ class CreateTeamActivity : AppCompatActivity() {
     }
 
     private fun saveTeamToFirebaseDatabase(teamLogoUrl: String) {
-        val teamNameUid = "${teamName}_${FirebaseAuth.getInstance().uid}"
-        val ref = FirebaseDatabase.getInstance().getReference("/team/$teamNameUid")
+//        val teamNameUid = "${teamName}_${FirebaseAuth.getInstance().uid}"
+        val teamUUID = UUID.randomUUID().toString()
+        val ref = FirebaseDatabase.getInstance().getReference("/teams/$teamUUID")
         val team = Team(teamName, teamOwner, teamIntroduce, teamLogoUrl)
         ref.setValue(team)
             .addOnSuccessListener {
                 Log.d(TAG, "firebase DB에 저장됨!")
-//                returnIntent.putExtra(TEAM, SAVED)
-//                setResult(Activity.RESULT_OK, returnIntent)
+
+                updateUserTeam(teamUUID)
+
                 setResult(Activity.RESULT_OK)
                 finish()
             }
@@ -118,5 +120,13 @@ class CreateTeamActivity : AppCompatActivity() {
                 hideLoading(loading_layout)
                 Toast.makeText(this, "firebase db 저장 실패: ${it.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun updateUserTeam(teamUUID: String){
+        val userUid = FirebaseAuth.getInstance().currentUser!!.uid
+        val userRef = FirebaseDatabase.getInstance().getReference("/users/$userUid")
+        val childUpdates = HashMap<String, Any>()
+        childUpdates["team"] = teamUUID
+        userRef.updateChildren(childUpdates)
     }
 }

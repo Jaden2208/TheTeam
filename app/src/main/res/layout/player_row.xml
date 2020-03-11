@@ -19,6 +19,7 @@
         android:background="@drawable/rectangle_striker"/>
 
     <TextView
+        android:id="@+id/tv_player_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="유재준"

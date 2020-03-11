@@ -17,32 +17,32 @@
             android:layout_height="wrap_content"
             android:text="소속 팀이 존재하지 않습니다."
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/btn_create_new_team"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="새 팀 만들기"
             android:layout_gravity="center"
-            android:padding="5dp"
-            android:textSize="18sp"
-            android:textColor="#fff"
             android:background="@drawable/rectangle_pd"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:padding="5dp"
+            android:text="새 팀 만들기"
+            android:textColor="#fff"
+            android:textSize="18sp" />
 
         <SearchView
             android:id="@+id/team_search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:queryHint="팀명을 입력해주세요"
-            android:iconifiedByDefault="false"/>
+            android:iconifiedByDefault="false"
+            android:queryHint="팀명을 입력해주세요" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list_of_teams"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -53,12 +53,46 @@
         android:orientation="vertical"
         android:visibility="visible">
 
-        <TextView
-            android:id="@+id/tv_team_name"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="FC아대사랑해"
-            android:textSize="20sp" />
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/team_logo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_default_profile_img"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0dp" />
+
+            <TextView
+                android:id="@+id/tv_team_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/font_tmon_monsori"
+                android:text="FC아대사랑해"
+                android:layout_toEndOf="@+id/team_logo"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/btn_leave_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="팀 탈퇴하기"
+                android:background="@drawable/rectangle_rb"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:padding="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -98,12 +132,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:circleRadius="8dp"
-            app:circleMargin="8dp"
+            app:animDelay="150"
             app:animDistance="10dp"
             app:animDuration="300"
-            app:animDelay="150"
-            app:animInterpolator="accelerateDecelerate"/>
+            app:animInterpolator="accelerateDecelerate"
+            app:circleMargin="8dp"
+            app:circleRadius="8dp" />
     </FrameLayout>
 
 </RelativeLayout>
